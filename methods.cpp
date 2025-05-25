@@ -15,17 +15,17 @@ void Dyhotomia_class::setTolerance(double eps) {
 }
 
 double Dyhotomia_class::dyhotomiaMethod() {
-    double c;
-    while ((b - a) / 2.0 > epsilon) {
-        c = (a + b) / 2.0;
-        if (f(c) == 0.0)
-            break;
-        else if (f(a) * f(c) < 0)
+    while (!(f(a) * f(b) > 0)) {
+        double c = (a + b) / 2;
+        if (f(a) * f(c) < 0) {
             b = c;
-        else
+        } else {
             a = c;
+        }
+        if (fabs(b - a) <= epsilon) {
+            return (a + b) / 2;
+        }
     }
-    return (a + b) / 2.0;
 }
 
 
